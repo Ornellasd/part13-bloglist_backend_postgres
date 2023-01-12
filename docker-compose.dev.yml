@@ -9,7 +9,7 @@ services:
     ports:
       - 3001:3001
     environment:
-      - DATABASE_URL=postgres://psql:example@db:5432/notes_db
+      - DATABASE_URL=postgres://psql:example@db:5432/blogs_db
     container_name: bloglist-backend-postgres
   db:
     image: postgres
