@@ -1,0 +1,27 @@
+services:
+  app:
+    image: bloglist-backend-postgres
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3001:3001
+    environment:
+      - DATABASE_URL=postgres://psql:example@db:5432/notes_db
+    container_name: bloglist-backend-postgres
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: psql
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: blogs_db
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
