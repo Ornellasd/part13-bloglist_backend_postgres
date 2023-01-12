@@ -1,0 +1,2 @@
+insert into blogs (author, url, title) values ('David Ornellas', 'https://github.com/ornellasd', 'First post from CLI');
+insert into blogs (author, url, title, likes) values ('Chippy The Dog', 'https://mobile.twitter.com/chippythedogxxo', 'Chippy loves you!', 125);
