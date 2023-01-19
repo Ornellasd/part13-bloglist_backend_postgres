@@ -1,7 +1,8 @@
-require('dotenv').config()
 const { Sequelize, Model, DataTypes } = require('sequelize')
 const express = require('express')
 const app = express()
+
+const { PORT } = require('./util/config')
 
 const blogsRouter = require('./controllers/blogs')
 
@@ -42,9 +43,6 @@ Blog.init({
   modelName: 'blog'
 })
 
-
-
-const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
