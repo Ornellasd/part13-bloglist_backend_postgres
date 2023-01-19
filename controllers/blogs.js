@@ -6,21 +6,21 @@ const blogFinder = async (req, res, next) => {
   next()
 }
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   const blogs = await Blog.findAll()
   res.json(blogs)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   try {
     const blog = await Blog.create(req.body)
     return res.json(blog)
   } catch (error) {
-    return res.status(400).json({ error })
+    next(error)
   }
 })
 
-router.get('/:id', blogFinder, async (req, res) => {
+router.get('/:id', blogFinder, async (req, res, next) => {
   if (req.blog) {
     res.json(req.blog)
   } else {
@@ -28,7 +28,7 @@ router.get('/:id', blogFinder, async (req, res) => {
   }
 });
 
-router.put('/:id', blogFinder, async (req, res) => {
+router.put('/:id', blogFinder, async (req, res, next) => {
   if (req.blog) {
     req.blog.likes = req.body.likes
     await req.blog.save()
@@ -38,7 +38,7 @@ router.put('/:id', blogFinder, async (req, res) => {
   }
 })
 
-router.delete('/:id', blogFinder, async (req, res) => {
+router.delete('/:id', blogFinder, async (req, res, next) => {
   if (req.blog) {
     await req.blog.destroy();
     res.status(200).end()
