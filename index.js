@@ -9,6 +9,8 @@ const blogsRouter = require('./controllers/blogs')
 const errorHandler = (error, request, response, next) => {
   if (error.name === 'SequelizeValidationError') {
     return response.status(403).send({ error: error.message })
+  } else if (error.name === 'SequelizeDatabaseError') {
+    return response.status(500).send({ error: error.message })
   }
 
   next(error)
